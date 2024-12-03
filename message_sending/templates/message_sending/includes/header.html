@@ -1,0 +1,32 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Сервис управления рассылками</h1>
+          {% if user.is_authenticated %}
+        <p class="lead text-body-primary">Добро пожаловать, {{user.email}}!</p>
+        <p>
+            <a href="{% url 'messaging:main' %}" class="btn btn-primary my-2">Главная</a>
+          <a href="{% url 'messaging:addressee_list' %}" class="btn btn-secondary my-2">Получатели</a>
+          <a href="{% url 'messaging:message_list' %}" class="btn btn-primary my-2">Сообщения</a>
+          <a href="{% url 'messaging:mailing_list' %}" class="btn btn-secondary my-2">Рассылки</a>
+          <a href="{% url 'messaging:log_list' %}" class="btn btn-primary my-2">Попытки рассылок</a>
+            {% if 'users.can_view_users' in perms %}
+            <a href="{% url 'users:user_list' %}" class="btn btn-primary my-2">Пользователи</a>
+            {% endif %}
+        </p>
+         {% else %}
+          <p class="lead text-body-primary">Добро пожаловать!</p>
+          {% endif %}
+        {% if user.is_authenticated %}
+              <form method="post" action="{% url 'users:logout' %}" style="display: inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link">Выход</button>
+              </form>
+          {% else %}
+            <a href="{% url 'users:login' %}" class="text-black">Вход</a>
+            <a href="{% url 'users:register' %}" class="text-black">Регистрация</a>
+            {% endif %}
+          </ul>
+      </div>
+    </div>
+ </section>
