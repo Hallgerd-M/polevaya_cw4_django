@@ -1,19 +1,10 @@
-from django.contrib.auth.models import Group
-from django.core.management import BaseCommand
-
-from users.models import User
+from django.core.management.base import BaseCommand
+from django.core.management import call_command
 
 
-class ModeratorCommand(BaseCommand):
-    help = "Add users as manager"
+class ManagerCommand(BaseCommand):
+    help = "Add users as managers"
 
     def handle(self, *args, **kwargs):
-        user, _ = User.objects.create(email="example@example.com")
-        user.set_password("123qwe")
-        user.is_active = True
-        user.is_staff = True
-
-        managers_group = Group.objects.get(name="Managers")
-        user.groups.add(managers_group)
-
-        user.save()
+        call_command('load_data', 'managers_fixture.json')
+        self.stdout.write(self.style.SUCCESS('Data from fixture successfully loaded'))

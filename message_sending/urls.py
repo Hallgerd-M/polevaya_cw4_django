@@ -18,7 +18,7 @@ from message_sending.views import (AddresseeCreateView, AddresseeDeleteView,
 app_name = MessageSendingConfig.name
 
 urlpatterns = [
-    path("main/", SampleView.as_view(), name="main"),
+    path("", SampleView.as_view(), name="main"),
     path("create_addressee/", AddresseeCreateView.as_view(), name="addressee_create"),
     path("create_message/", MessageCreateView.as_view(), name="message_create"),
     path("create_mailing/", MailingCreateView.as_view(), name="mailing_create"),

@@ -46,13 +46,20 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     success_url = reverse_lazy("message_sending:main")
+    permission_required = 'users.change_user'
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
-class UserDetailView(DetailView):
+class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     form_class = UserForm
     success_url = reverse_lazy("message_sending:main")
+    permission_required = 'users.change_user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = self.request.user
+        return context
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")

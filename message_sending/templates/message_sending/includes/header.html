@@ -13,6 +13,9 @@
             {% if 'users.can_view_users' in perms %}
             <a href="{% url 'users:user_list' %}" class="btn btn-primary my-2">Пользователи</a>
             {% endif %}
+            {% if user == user %}
+            <a href="{% url 'users:user_detail' user.pk %}" class="btn btn-primary my-2">Мой профиль</a>
+            {% endif %}
         </p>
          {% else %}
           <p class="lead text-body-primary">Добро пожаловать!</p>
@@ -20,11 +23,11 @@
         {% if user.is_authenticated %}
               <form method="post" action="{% url 'users:logout' %}" style="display: inline">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-link nav-link">Выход</button>
+                  <button type="submit" class="btn btn-secondary">Выйти</button>
               </form>
           {% else %}
-            <a href="{% url 'users:login' %}" class="text-black">Вход</a>
-            <a href="{% url 'users:register' %}" class="text-black">Регистрация</a>
+            <a href="{% url 'users:login' %}" class="btn btn-secondary">Вход</a>
+            <a href="{% url 'users:register' %}" class="btn btn-secondary">Регистрация</a>
             {% endif %}
           </ul>
       </div>

@@ -34,8 +34,17 @@ class AddresseeUpdateView(LoginRequiredMixin, UpdateView):
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
-class AddresseeListView(ListView):
+class AddresseeListView(LoginRequiredMixin, ListView):
     model = Addressee
+    template_name = 'message_sending/addressee_list.html'
+    context_object_name = 'addressees'
+
+    def get_queryset(self):
+        user = self.request.user
+        user_id = user.id
+        if not self.request.user.has_perm('message_sending.can_view_addressees'):
+            return Addressee.objects.filter(owner_id=user_id)
+        return Addressee.objects.all()
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
@@ -70,6 +79,14 @@ class MessageUpdateView(LoginRequiredMixin, UpdateView):
 @method_decorator(cache_page(60 * 15), name="dispatch")
 class MessageListView(ListView):
     model = Message
+    context_object_name = 'messages'
+
+    def get_queryset(self):
+        user = self.request.user
+        user_id = user.id
+        if not self.request.user.has_perm('message_sending.can_view_messages'):
+            return Message.objects.filter(owner_id=user_id)
+        return Message.objects.all()
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
@@ -85,6 +102,14 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
 class MailingListView(ListView):
     model = Mailing
     template_name = "message_sending/mailing_list.html"
+    context_object_name = 'mailings'
+
+    def get_queryset(self):
+        user = self.request.user
+        user_id = user.id
+        if not self.request.user.has_perm('message_sending.can_view_mailings'):
+            return Mailing.objects.filter(owner_id=user_id)
+        return Mailing.objects.all()
 
 
 class MailingCreateView(LoginRequiredMixin, CreateView):

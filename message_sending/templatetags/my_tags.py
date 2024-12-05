@@ -20,15 +20,34 @@ def count_all():
 
 
 @register.simple_tag()
+def count_all_for_user(user):
+    mailings_count = Mailing.objects.filter(owner=user).count()
+    return mailings_count
+
+
+@register.simple_tag()
 def count_active_mailings():
     active_mailings_count = Mailing.objects.filter(status="launched").count()
     return active_mailings_count
 
 
 @register.simple_tag()
+def count_active_mailings_for_user(user):
+    active_mailings = Mailing.objects.filter(owner=user)
+    count_for_user = active_mailings.filter(status="launched").count()
+    return count_for_user
+
+
+@register.simple_tag()
 def count_unique_addressees():
     unique_addressees = Addressee.objects.all().count()
     return unique_addressees
+
+
+@register.simple_tag()
+def count_unique_addressees_for_user(user):
+    unique_addressees_for_user = Addressee.objects.filter(owner=user).count()
+    return unique_addressees_for_user
 
 
 @register.simple_tag()

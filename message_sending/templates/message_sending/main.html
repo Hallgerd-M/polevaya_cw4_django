@@ -1,6 +1,7 @@
 {% extends 'message_sending/base.html' %}
 {% load my_tags %}
 {% block content %}
+{% if "message_sending.can_change_status" in perms %}
 <div class="card shadow-sm">
         <div class="card-body">
             <p class="card-text">
@@ -19,4 +20,25 @@
             </div>
         </div>
     </div>
+{% else %}
+<div class="card shadow-sm">
+        <div class="card-body">
+            <p class="card-text">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Количество всех рассылок:</p> {% count_all_for_user user %}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Количество активных рассылок: </p> {% count_active_mailings_for_user user %}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Количество уникальных получателей: </p> {% count_unique_addressees_for_user user %}
+                    </li>
+                </ul>
+            </p>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
 {% endblock %}
