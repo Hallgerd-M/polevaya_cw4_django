@@ -1,0 +1,37 @@
+{% extends 'message_sending/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div> <a class="btn btn-primary" href="{% url 'message_sending:mailing_create' %}" role="button">Создать новую рассылку</a>
+                  </div>
+{% for object in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <h3> Статус: {{ object.status }}</h3>
+                </p>
+                <p class="card-text">
+                <h3> Сообщение: {{ object.message }}
+                </h3>
+                </p>
+                <p class="card-text">
+                <h3> Получатель:
+              {% for addressee in object.addressee.all %}
+                        {{ addressee.email}},
+                        {% endfor %}</h3>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  {% if "message_sending.can_view_mailings" in perms or user == object.owner %}
+                  <a class="btn btn-primary" href="{% url 'message_sending:mailing_detail' object.pk  %}" role="button">Перейти в карточку рассылки</a>
+                  {% if object.status != "completed" %}
+                  <a class="btn btn-success" href="{% url 'message_sending:mailing_send' object.pk  %}" role="button">Начать рассылку</a>
+                  {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endfor %}
+{% endblock %}

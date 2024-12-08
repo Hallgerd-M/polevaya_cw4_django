@@ -1,0 +1,29 @@
+{% extends 'message_sending/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<h3>Всего рассылок: {% count_all %} </h3>
+<h3>Успешных рассылок: {% count_successfull_mailings %} </h3>
+<h3>Неуспешных рассылок: {% count_unsuccessfull_mailings %} </h3>
+<h3>Отправлено писем: {% count_sent_mails %} </h3>
+
+{% for object in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <h3> Статус: {{ object.status }}</h3>
+                </p>
+                <p class="card-text">
+                <h3> Рассылка: {{ object.mailing }}
+                </h3>
+                </p>
+                <p class="card-text">
+                <h3> Ответ: {{ object.answer }}</h3>
+                </p>
+            </div>
+          </div>
+        </div>
+{% endfor %}
+
+{% endblock %}

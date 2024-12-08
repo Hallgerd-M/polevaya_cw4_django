@@ -1,0 +1,124 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$hXJrhOlbzaUmgzkX6BM8WZ$JTrZBbqZ3pV88tC2zTwNGRVq+hEwnxwrJcgvVgA7yoQ=",
+        "last_login": "2024-12-03T11:19:30.426Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-11-26T13:37:08.387Z",
+        "email": "admin@example.com",
+        "phone": null,
+        "country": null,
+        "avatar": "",
+        "token": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$vOd8vgUrdnsal8b57BXzXp$tSj9ksqradXpxe4HdbYSKdXEJt15lzhHZTfXDJDBzwQ=",
+        "last_login": "2024-12-05T10:46:01.265Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-27T07:31:46.926Z",
+        "email": "mirwen@yandex.ru",
+        "phone": "+79587463524",
+        "country": "Russia",
+        "avatar": "",
+        "token": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$4W3h30woWh6lX657D7vgc9$tiMeyHxPa0pSv40tql7byAr3m5XEYjD7x7XsKT2azjc=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-27T07:39:48.965Z",
+        "email": "test@yandex.ru",
+        "phone": "+12125552368",
+        "country": "Russia",
+        "avatar": "",
+        "token": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$5aVuKnpqIsHcWUZId9TfaG$81xz8sT4aGRFh6iVrJ13dTVnDgTAJgOi4dc+1Idq8XU=",
+        "last_login": "2024-11-30T22:32:38Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": false,
+        "date_joined": "2024-11-30T22:21:24Z",
+        "email": "hallgerd666@gmail.com",
+        "phone": null,
+        "country": null,
+        "avatar": "",
+        "token": null,
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$DznA6Cxl7eYWJDODflJxQb$21Y2q91hAy1k0301i6yq6J1C00J0R/ld/C4X0MXeg8A=",
+        "last_login": "2024-12-05T10:20:23.371Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-11-30T23:34:57Z",
+        "email": "manager@test.ru",
+        "phone": null,
+        "country": null,
+        "avatar": "",
+        "token": null,
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            49,
+            24,
+            44,
+            36,
+            52,
+            51,
+            32,
+            50,
+            28,
+            54,
+            53,
+            40
+        ]
+    }
+}
+]

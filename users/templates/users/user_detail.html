@@ -1,0 +1,37 @@
+{% extends 'message_sending/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col" xmlns="http://www.w3.org/1999/html">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="card-text">
+            Пользователь {{ object.email }}
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Телефон:</p>{{ object.phone }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Страна: </p> {{ object.country }}
+                    </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Активен: </p> {{ object.is_active }}
+                    </li>
+             {% if 'users.can_block_users' in perms and user != object %}
+             <form action="{% url 'users:user_block' object.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Заблокировать пользователя</button>
+    </form>
+{% endif %}
+                </ul>
+            </p>
+
+            <div class="d-flex justify-content-between align-items-center"><div class="btn-group">
+                <a class="btn btn-primary" href="{% url 'message_sending:main' %}" role="button">Назад</a>
+                <a class="btn btn-primary" href="{% url 'users:user_update' object.pk %}" role="button">Редактировать</a>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

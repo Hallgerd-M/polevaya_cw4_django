@@ -1,0 +1,30 @@
+{% extends 'message_sending/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div> <a class="btn btn-primary" href="{% url 'message_sending:addressee_create' %}" role="button">Создать нового получателя</a>
+                  </div>
+{% for object in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <h3> Ф.И.О. получателя: {{ object.name }}</h3>
+                </p>
+                <p class="card-text">
+                <h3> Электронный адрес: {{ object.email }}</h3>
+                </p>
+                <p class="card-text">
+                 Комментарий: {{ object.comment | truncatechars:100 }}
+                </p>
+               <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  {% if user == object.owner %}
+                  <a class="btn btn-primary" href="{% url 'message_sending:addressee_detail' object.pk  %}" role="button">Перейти в карточку получателя</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endfor %}
+{% endblock %}

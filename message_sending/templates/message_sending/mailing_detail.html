@@ -1,0 +1,44 @@
+{% extends 'message_sending/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col" xmlns="http://www.w3.org/1999/html">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="card-text">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Название:</p>{{ object.message }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Электронный адрес получателя: </p>
+                        {% for addressee in object.addressee.all %}
+                        {{ addressee.email }}
+                        {% endfor %}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Статус: </p> {{ object.status }}
+                    </li>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                        <p class="fw-bold">Активна: </p> {{ object.is_active }}
+                    </li>
+            {% if "message_sending.can_change_status" in perms or user == object.owner %}
+             <form action="{% url 'message_sending:mailing_unactivate' object.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Отключить рассылку</button>
+    </form>
+{% endif %}
+                </ul>
+            </p>
+
+            <div class="d-flex justify-content-between align-items-center"><div class="btn-group">
+                <a class="btn btn-primary" href="{% url 'message_sending:mailing_list' %}" role="button">Назад</a>
+                <a class="btn btn-primary" href="{% url 'message_sending:mailing_update' object.pk %}" role="button">Редактировать</a>
+                <a class="btn btn-primary" href="{% url 'message_sending:mailing_delete' object.pk %}" role="button">Удалить</a>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
